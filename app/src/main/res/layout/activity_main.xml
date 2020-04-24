@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btn_newGame"
+        android:layout_width="388dp"
+        android:layout_height="82dp"
+        android:layout_marginTop="204dp"
+        android:layout_marginBottom="64dp"
+        android:text="New Game"
+        android:textAllCaps="false"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_slot_bottomRight"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toEndOf="@+id/btn_slot_bottomLeft"
+        app:layout_constraintTop_toBottomOf="@+id/btn_slot_middleCenter"
+        app:layout_constraintVertical_bias="0.505" />
+
+    <Button
+        android:id="@+id/btn_slot_bottomCenter"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_slot_bottomRight"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_slot_bottomLeft"
+        app:layout_constraintTop_toBottomOf="@+id/btn_slot_middleCenter" />
+
+    <Button
+        android:id="@+id/btn_slot_bottomRight"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_slot_bottomCenter"
+        app:layout_constraintTop_toBottomOf="@+id/btn_slot_middleRight" />
+
+    <Button
+        android:id="@+id/btn_slot_middleCenter"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_slot_middleRight"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_slot_middleLeft"
+        app:layout_constraintTop_toBottomOf="@+id/btn_slot_topCenter" />
+
+    <Button
+        android:id="@+id/btn_slot_middleLeft"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_slot_middleCenter"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_slot_topLeft" />
+
+    <Button
+        android:id="@+id/btn_slot_middleRight"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_slot_middleCenter"
+        app:layout_constraintTop_toBottomOf="@+id/btn_slot_topRight" />
+
+    <Button
+        android:id="@+id/btn_slot_topCenter"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_slot_topRight"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_slot_topLeft"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="status"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_newGame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_slot_bottomCenter" />
+
+    <Button
+        android:id="@+id/btn_slot_topLeft"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_slot_topCenter"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_slot_topRight"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_slot_topCenter"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_slot_bottomLeft"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_slot_bottomCenter"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_slot_middleLeft" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
