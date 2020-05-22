@@ -10,9 +10,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
-    private boolean isPlayerXTurn;
-    //private boolean isResetState;
+    private final int[][] WIN_COMBOS = { { 0, 1, 2 }, { 3, 4, 5 },
+                                         { 6, 7, 8 }, { 0, 4, 8 },
+                                         { 2, 4, 6 }, { 0, 3, 6 },
+                                         { 1, 4, 7 }, { 2, 5, 8 } };
+    private boolean isPlayerXTurn = true;
+    private boolean isGameWon = false;
+    private boolean isGameFilled = false;
 
     private TextView statusText;
     private Button[] buttonBoard;
@@ -63,38 +67,80 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void changeButtonSymbol(Button selectedBtn){
-        if( selectedBtn.getText() == "" ) {
+        if( selectedBtn.getText().equals("") ) {
             selectedBtn.setText( isPlayerXTurn ? "X" : "O" );
-            isPlayerXTurn = !isPlayerXTurn;
+            updateGameOverValues();
+            if(isGameWon || isGameFilled) {
+                DisableButtons();
+            }
+            else{
+                isPlayerXTurn = !isPlayerXTurn;
+            }
             changeStatusText();
         }
     }
 
+    private void DisableButtons() {
+        for ( Button button : buttonBoard ) {
+            button.setEnabled(false);
+        }
+    }
+
+    private void updateGameOverValues() {
+        String playerSymbol = isPlayerXTurn ? "X" : "O";
+        byte numButtonsFilled = 1;
+        for ( int i = 0; i < 8; i++ ) {
+            if( buttonBoard[WIN_COMBOS[i][0]].getText() == playerSymbol &&
+                buttonBoard[WIN_COMBOS[i][1]].getText() == playerSymbol &&
+                buttonBoard[WIN_COMBOS[i][2]].getText() == playerSymbol ) {
+                isGameWon = true;
+                return;
+            }
+            if( buttonBoard[i].getText() != "" ){
+                numButtonsFilled++;
+            }
+        }
+        isGameFilled = numButtonsFilled == 9;
+    }
+
     private void changeStatusText(){
         String StatusMessage;
-        StatusMessage = isPlayerXTurn ? "Player X's Turn" : "Player O's Turn";
+        if(isGameFilled){
+            StatusMessage = "It's a tie!";
+        }
+        else if(isGameWon){
+            StatusMessage = isPlayerXTurn ? "X wins!" : "O wins!";
+        }
+        else {
+            StatusMessage = isPlayerXTurn ? "Player X's turn" : "Player O's turn";
+        }
         statusText.setText( StatusMessage );
     }
 
     private void newGame(){
-        isPlayerXTurn = false;
+        isPlayerXTurn = true;
+        isGameWon = false;
+        isGameFilled = false;
         for ( Button button : buttonBoard ) {
             button.setText("");
+            button.setEnabled(true);
         }
         changeStatusText();
     }
-
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
         outState.putBoolean( "isPlayerXTurn", isPlayerXTurn );
+        outState.putBoolean( "isGameOver", isGameWon);
+        outState.putBoolean( "isGameFilled", isGameFilled);
 
         CharSequence[] buttonBoardValues = new String[ buttonBoard.length ];
-        for( int i = 0; i < buttonBoard.length; i++ ) {
+        for ( int i = 0; i < buttonBoard.length; i++ ) {
             buttonBoardValues[i] = buttonBoard[i].getText();
-        }
+        };
+
         outState.putCharSequenceArray( "buttonBoardValues", buttonBoardValues );
     }
 
@@ -103,7 +149,13 @@ public class MainActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
 
         isPlayerXTurn = savedInstanceState.getBoolean( "isPlayerXTurn" );
+        isGameWon = savedInstanceState.getBoolean( "isGameOver" );
+        isGameFilled = savedInstanceState.getBoolean( "isGameFilled" );
+
         changeStatusText();
+        if(isGameWon || isGameFilled) {
+            DisableButtons();
+        }
 
         CharSequence[] buttonBoardValues =
                 savedInstanceState.getCharSequenceArray( "buttonBoardValues" );
@@ -112,5 +164,4 @@ public class MainActivity extends AppCompatActivity {
             buttonBoard[i].setText(buttonBoardValues[i]);
         }
     }
-
 }
